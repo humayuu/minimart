@@ -91,12 +91,12 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
                                         <i class="fa-regular fa-id-badge me-2"></i>Profile
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('change.password') }}">
                                         <i class="fa-solid fa-key me-2"></i>Change Password
                                     </a>
                                 </li>

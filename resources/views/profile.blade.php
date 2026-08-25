@@ -10,8 +10,8 @@
                             <i class="fa-solid fa-user fa-2x text-primary mb-2"></i>
                             <h4 class="fw-bold">Update Profile</h4>
                         </div>
-
-                        <form method="POST" action="{{ route('signup') }}">
+                        <x-alert-success />
+                        <form method="POST" action="{{ route('profile.update', Auth::id()) }}">
                             @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">Full Name</label>
@@ -29,13 +29,13 @@
                             </div>
                             <div class="d-flex gap-2">
                                 <button type="submit" class="btn btn-primary">
-                                    <i class="fa-solid fa-user-plus"></i> Save Changes
+                                    <i class="fa-solid fa-floppy-disk"></i> Save Changes
                                 </button>
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa-solid fa-user-plus"></i> Reset
+                                <button type="reset" class="btn btn-secondary">
+                                    <i class="fa-solid fa-rotate-left"></i> Reset
                                 </button>
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa-solid fa-user-plus"></i> Cancel
+                                <button type="button" class="btn btn-outline-secondary">
+                                    <i class="fa-solid fa-xmark"></i> Cancel
                                 </button>
                             </div>
                         </form>

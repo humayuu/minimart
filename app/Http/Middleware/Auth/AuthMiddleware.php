@@ -17,7 +17,7 @@ class AuthMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Please Login Your Account First');
+            return redirect()->route('user.login')->with('error', 'Please Login Your Account First');
         }
         return $next($request);
     }

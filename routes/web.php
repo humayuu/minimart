@@ -2,9 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ProfileController;
-use App\Http\Middleware\Auth\isLoggedInMiddleware;
 use Illuminate\Support\Facades\Route;
-use Laravel\Pao\Drivers\Concerns\ProfileCollector;
 
 // Public Routes
 Route::get('/', fn() => view('home'))->name('home');
@@ -21,6 +19,11 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::controller(ProfileController::class)->group(function () {
-    Route::get('/profile', 'profilePage')->name('profile');
-    Route::get('/change/password', 'UpdatePasswordPage')->name('change.password');
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', 'profilePage')->name('profile');
+        Route::get('/change/password', 'UpdatePasswordPage')->name('change.password');
+
+        Route::post('/profile/update/{id}', 'profileUpdate')->name('profile.update');
+        Route::post('/password/update/{id}', 'passwordUpdate')->name('password.update');
+    });
 });

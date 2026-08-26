@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Brand\StoreBrandRequest;
+use App\Http\Requests\Brand\UpdateBrandRequest;
 use App\Models\Brand;
+use App\Services\BrandService;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
+    public function __construct(private BrandService $brandService) {}
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $brands = $this->brandService->getPaginate();
+        $brandCount = $brands->total();
+        return view('admin.brand.index', compact('brands', 'brandCount'));
     }
 
     /**
@@ -20,15 +26,16 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.brand.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBrandRequest $request)
     {
-        //
+        $this->brandService->createBrand($request->validated(), $request->file('image'));
+        return redirect()->back()->with('success', 'Brand Created Successfully');
     }
 
     /**
@@ -36,7 +43,7 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        //
+        return view('admin.brand.detail', compact('brand'));
     }
 
     /**
@@ -44,15 +51,16 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        return view('admin.brand.edit', compact('brand'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Brand $brand)
+    public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        //
+        $this->brandService->brandUpdate($request->validated(), $request->file('image'));
+        return redirect()->back()->with('success', 'Brand Updated Successfully');
     }
 
     /**

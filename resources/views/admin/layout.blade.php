@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MinimMrt Admin</title>
+    <title>MiniMart Admin</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,12 +24,12 @@
         <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; min-height: 100vh;">
 
             <!-- Brand -->
-            <a href="/dashboard" class="d-flex align-items-center mb-3 text-white text-decoration-none">
+            <a href="/dashboard" class="d-flex justify-content-center mt-2 mb-3 text-white text-decoration-none">
 
                 <i class="fa-solid fa-store me-2 fs-4"></i>
 
                 <span class="fs-4 fw-bold">
-                    MinimMrt
+                    MiniMart
                 </span>
             </a>
 
@@ -40,7 +40,7 @@
 
                 <!-- Dashboard -->
                 <li class="nav-item mb-1">
-                    <a href="/dashboard" class="nav-link active text-white">
+                    <a href="{{ route('dashboard') }}" class="nav-link active text-white">
                         <i class="fa-solid fa-gauge me-2"></i>
                         Dashboard
                     </a>
@@ -48,7 +48,7 @@
 
                 <!-- Brands -->
                 <li class="nav-item mb-1">
-                    <a href="/brands" class="nav-link text-white">
+                    <a href="{{ route('brand.index') }}" class="nav-link text-white">
                         <i class="fa-solid fa-tag me-2"></i>
                         Brands
                     </a>
@@ -145,26 +145,7 @@
         </div>
 
 
-        <!-- Main Content -->
-        <div class="flex-grow-1 p-4 m-5">
-
-            <div class="card shadow">
-
-                <div class="card-body">
-
-                    <h1 class="mb-4">
-                        Dashboard
-                    </h1>
-
-                    <p class="text-muted">
-                        Welcome to the Minimart Admin Dashboard.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
+        @yield('main')
 
     </div>
 

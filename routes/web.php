@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ProfileController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 // Public Routes
@@ -29,8 +31,12 @@ Route::controller(ProfileController::class)->group(function () {
     });
 });
 
+// Admin Users Routes
 Route::prefix('admin')->group(function () {
     Route::controller(AdminController::class)->group(function () {
-        Route::get('/dashboard', 'dashboard');
+        Route::get('/dashboard', 'dashboard')->name('dashboard');
+
+        Route::resource('brand', BrandController::class);
+        Route::resource('category', CategoryController::class);
     });
 });

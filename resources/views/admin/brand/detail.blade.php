@@ -109,7 +109,7 @@
                                         </small>
 
                                         <h6 class="fw-bold mb-0">
-                                            {{ $productCount }}
+                                            {{ $brand->product->count() }}
                                         </h6>
                                     </div>
                                 </div>

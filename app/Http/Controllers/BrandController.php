@@ -43,8 +43,7 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        $productCount = $brand->product()->count();
-        return view('admin.brand.detail', compact('brand', 'productCount'));
+        return view('admin.brand.detail', compact('brand',));
     }
 
     /**

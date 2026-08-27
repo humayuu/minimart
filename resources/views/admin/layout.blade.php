@@ -40,7 +40,8 @@
 
                 <!-- Dashboard -->
                 <li class="nav-item mb-1">
-                    <a href="{{ route('dashboard') }}" class="nav-link active text-white">
+                    <a href="{{ route('dashboard') }}"
+                        class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }} text-white">
                         <i class="fa-solid fa-gauge me-2"></i>
                         Dashboard
                     </a>
@@ -48,7 +49,8 @@
 
                 <!-- Brands -->
                 <li class="nav-item mb-1">
-                    <a href="{{ route('brand.index') }}" class="nav-link text-white">
+                    <a href="{{ route('brand.index') }}"
+                        class="nav-link {{ request()->routeIs('brand.*') ? 'active' : '' }} text-white">
                         <i class="fa-solid fa-tag me-2"></i>
                         Brands
                     </a>
@@ -56,7 +58,8 @@
 
                 <!-- Categories -->
                 <li class="nav-item mb-1">
-                    <a href="/categories" class="nav-link text-white">
+                    <a href="{{ route('category.index') }}"
+                        class="nav-link {{ request()->routeIs('category.*') ? 'active' : '' }} text-white">
                         <i class="fa-solid fa-folder-tree me-2"></i>
                         Categories
                     </a>

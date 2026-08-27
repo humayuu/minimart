@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 // Public Routes
@@ -38,5 +39,6 @@ Route::prefix('admin')->group(function () {
 
         Route::resource('brand', BrandController::class);
         Route::resource('category', CategoryController::class);
+        Route::resource('product', ProductController::class);
     });
 });

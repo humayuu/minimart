@@ -12,7 +12,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::with(['brand', 'category'])->orderBy('id', 'DESC')->paginate(5);
+        $productCount = $products->count();
+        return view('admin.product.index', compact('products', 'productCount'));
     }
 
     /**
@@ -20,7 +22,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.product.create');
     }
 
     /**

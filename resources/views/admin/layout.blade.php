@@ -24,7 +24,8 @@
         <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; min-height: 100vh;">
 
             <!-- Brand -->
-            <a href="/dashboard" class="d-flex justify-content-center mt-2 mb-3 text-white text-decoration-none">
+            <a href="{{ route('dashboard') }}"
+                class="d-flex justify-content-center mt-2 mb-3 text-white text-decoration-none">
 
                 <i class="fa-solid fa-store me-2 fs-4"></i>
 
@@ -67,7 +68,8 @@
 
                 <!-- Products -->
                 <li class="nav-item mb-1">
-                    <a href="/products" class="nav-link text-white">
+                    <a href="{{ route('product.index') }}"
+                        class="nav-link {{ request()->routeIs('product.*') ? 'active' : '' }} text-white">
                         <i class="fa-solid fa-box me-2"></i>
                         Products
                     </a>

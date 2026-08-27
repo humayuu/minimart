@@ -28,4 +28,13 @@ class Product extends Model
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

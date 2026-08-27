@@ -33,7 +33,7 @@ class StoreBrandRequest extends FormRequest
             'description' => [
                 'nullable',
                 'string',
-                'min:20',
+                'min:10',
             ],
             'image' => [
                 'required',

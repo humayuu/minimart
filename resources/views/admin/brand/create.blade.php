@@ -14,7 +14,7 @@
                         </p>
                     </div>
 
-                    <a href="{{ route('brand.index') }}" class="btn btn-dark">
+                    <a href="{{ url()->previous() }}" class="btn btn-dark">
                         <i class="fa-solid fa-arrow-left me-2"></i>
                         Back
                     </a>

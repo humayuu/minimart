@@ -34,10 +34,10 @@ class UpdateBrandRequest extends FormRequest
             'description' => [
                 'nullable',
                 'string',
-                'min:20',
+                'min:10',
             ],
             'image' => [
-                'required',
+                'nullable',
                 'image',
                 'mimes:png,jpg,jpeg',
                 'max:2048'

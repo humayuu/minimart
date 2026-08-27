@@ -43,7 +43,8 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        return view('admin.brand.detail', compact('brand'));
+        $productCount = $brand->product()->count();
+        return view('admin.brand.detail', compact('brand', 'productCount'));
     }
 
     /**
@@ -59,7 +60,7 @@ class BrandController extends Controller
      */
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
-        $this->brandService->brandUpdate($request->validated(), $request->file('image'));
+        $this->brandService->updateBrand($request->validated(), $brand, $request->file('image'));
         return redirect()->back()->with('success', 'Brand Updated Successfully');
     }
 
@@ -68,6 +69,7 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $this->brandService->deleteBrand($brand);
+        return redirect()->back()->with('success', 'Brand Deleted Successfully');
     }
 }

@@ -35,7 +35,7 @@
                                 <th scope="col">Logo</th>
                                 <th scope="col">Brand Name</th>
                                 <th scope="col">Brand Slug</th>
-                                <th scope="col" class="text-end">Actions</th>
+                                <th scope="col" class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,14 +66,14 @@
 
                                     <td class="d-flex justify-content-center gap-2">
 
-                                        <a href="{{ route('brand.edit', $brand) }}" class="btn btn-sm btn-secondary"
-                                            title="Edit">
-                                            <i class="fa-solid fa-pen"></i>
+                                        <a href="{{ route('brand.show', $brand->id) }}" class="btn btn-sm btn-primary"
+                                            title="Detail">
+                                            <i class="fa-solid fa-eye"></i>
                                         </a>
 
-                                        <a href="{{ route('brand.show', $brand) }}" class="btn btn-sm btn-primary"
-                                            title="View">
-                                            <i class="fa-solid fa-eye"></i>
+                                        <a href="{{ route('brand.edit', $brand) }}" class="btn btn-sm btn-dark"
+                                            title="Edit">
+                                            <i class="fa-solid fa-pen"></i>
                                         </a>
 
                                         <button type="button" class="btn btn-sm btn-danger" title="Delete"
@@ -126,7 +126,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 
-                    <form action="{{ route('brand.destroy', $brand) }}" method="POST">
+                    <form id="deleteBrandForm" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">
@@ -138,4 +138,16 @@
             </div>
         </div>
     </div>
+    <script>
+        const deleteBrandModal = document.getElementById('deleteBrandModal');
+
+        deleteBrandModal.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const brandName = button.getAttribute('data-brand-name');
+            const deleteUrl = button.getAttribute('data-delete-url');
+
+            document.getElementById('deleteBrandName').textContent = brandName;
+            document.getElementById('deleteBrandForm').action = deleteUrl;
+        });
+    </script>
 @endsection

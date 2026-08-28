@@ -5,6 +5,7 @@ namespace App\Http\Requests\Brand;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Override;
 
 class UpdateBrandRequest extends FormRequest
 {
@@ -32,12 +33,12 @@ class UpdateBrandRequest extends FormRequest
                 Rule::unique('brands', 'brand_name')->ignore($this->route('brand')),
             ],
             'description' => [
-                'nullable',
+                'sometimes',
                 'string',
                 'min:10',
             ],
             'image' => [
-                'nullable',
+                'sometimes',
                 'image',
                 'mimes:png,jpg,jpeg',
                 'max:2048'

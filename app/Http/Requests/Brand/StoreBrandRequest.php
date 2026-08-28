@@ -31,7 +31,7 @@ class StoreBrandRequest extends FormRequest
                 'unique:brands,brand_name',
             ],
             'description' => [
-                'nullable',
+                'sometimes',
                 'string',
                 'min:10',
             ],

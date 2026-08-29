@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Public Routes
@@ -41,5 +42,6 @@ Route::prefix('admin')->group(function () {
         Route::resource('category', CategoryController::class);
         Route::get('product/status/{product}', [ProductController::class, 'productStatus'])->name('product.status');
         Route::resource('product', ProductController::class);
+        Route::resource('user', UserController::class);
     });
 });

@@ -15,7 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Brand::factory()->count(10)->create();
-        Brand::factory(10)->create();
+        $this->call([
+            RoleSeeder::class,
+            PermissionSeeder::class,
+            SuperAdminSeeder::class,
+        ]);
     }
 }

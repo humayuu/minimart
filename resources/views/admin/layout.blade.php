@@ -85,7 +85,8 @@
 
                 <!-- Users -->
                 <li class="nav-item mb-1">
-                    <a href="/users" class="nav-link text-white">
+                    <a href="{{ route('user.index') }}"
+                        class="nav-link {{ request()->routeIs('user.*') ? 'active' : '' }} text-white">
                         <i class="fa-solid fa-users me-2"></i>
                         Users
                     </a>

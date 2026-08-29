@@ -80,13 +80,13 @@
                                                 {{ number_format($product->product_price - $product->product_discount_price, 2) }}
                                             </span>
                                         @else
-                                            <span class="fw-semibold">
+                                            <span class="fw-semibold px-3">
                                                 {{ number_format($product->product_price, 2) }}
                                             </span>
                                         @endif
                                     </td>
 
-                                    <td>
+                                    <td class="fs-5">
                                         @if ($product->is_active)
                                             <span class="badge bg-success-subtle text-success-emphasis">Active</span>
                                         @else
@@ -96,8 +96,11 @@
 
                                     <td class="d-flex justify-content-center gap-2">
 
-                                        <a href="" class="btn btn-sm btn-success" title="Detail">
-                                            <i class="fa-solid fa-thumbs-up"></i>
+                                        <a href="{{ route('product.status', $product->id) }}"
+                                            class="btn btn-sm btn-{{ $product->is_active == 1 ? 'success' : 'secondary' }}"
+                                            title="Detail">
+                                            <i
+                                                class="fa-solid fa-thumbs-{{ $product->is_active == 1 ? 'up' : 'down' }}"></i>
                                         </a>
 
                                         <a href="{{ route('product.show', $product->id) }}" class="btn btn-sm btn-primary"

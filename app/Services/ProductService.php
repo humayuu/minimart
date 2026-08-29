@@ -83,7 +83,6 @@ class ProductService
                 'category_id' => $data['category'],
                 'product_description' => $data['description'],
                 'product_price' => $data['price'],
-                'product_stock' => $data['stock'],
                 'product_discount_price' => $data['discount'] == 0 ? null : $data['discount'],
             ]);
 
@@ -91,7 +90,7 @@ class ProductService
                 Storage::disk('public')->delete($oldImage);
                 $path = $image->store('products', 'public');
 
-                $product->image()->create([
+                $product->image()->update([
                     'path' => $path,
                     'disk' => 'public',
                     'alt_text' => $data['name'],
@@ -105,5 +104,17 @@ class ProductService
     /**
      * For Delete Product with image
      */
-    public function productDelete() {}
+    public function productDelete(Product $product)
+    {
+        return DB::transaction(function () use ($product) {
+            $imagePath = $product->image?->path;
+            $deleted = $product->delete();
+
+            if ($deleted && $imagePath) {
+                Storage::disk('public')->delete($imagePath);
+            }
+
+            return $deleted;
+        });
+    }
 }

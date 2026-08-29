@@ -6,6 +6,8 @@ use App\Http\Requests\Product\StoreProductRequest;
 use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use App\Services\ProductService;
+use Illuminate\Http\Request;
+
 // use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -53,7 +55,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('admin.product.edit', compact('product'));
+        $brands = $this->productServices->getBrands();
+        $categories = $this->productServices->getCategories();
+        return view('admin.product.edit', compact('product', 'brands', 'categories'));
     }
 
     /**
@@ -70,6 +74,19 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $this->productServices->productDelete($product);
+        return redirect()->back()->with('success', 'Product Deleted Successfully');
+    }
+
+    /**
+     * For Update Product Status
+     */
+    public function productStatus(Request $request, Product $product)
+    {
+        $product->update([
+            'is_active' => !$product->is_active,
+        ]);
+
+        return redirect()->back()->with('success', 'Status Updated');
     }
 }

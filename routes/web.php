@@ -39,6 +39,7 @@ Route::prefix('admin')->group(function () {
 
         Route::resource('brand', BrandController::class);
         Route::resource('category', CategoryController::class);
+        Route::get('product/status/{product}', [ProductController::class, 'productStatus'])->name('product.status');
         Route::resource('product', ProductController::class);
     });
 });

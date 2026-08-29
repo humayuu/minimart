@@ -8,9 +8,9 @@
                 <!-- Header -->
                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
                     <div>
-                        <h1 class="h3 fw-bold mb-1">Add Product</h1>
+                        <h1 class="h3 fw-bold mb-1">Edit Product</h1>
                         <p class="text-muted mb-0">
-                            Create a new Product for your store.
+                            Edit Product for your store.
                         </p>
                     </div>
 
@@ -45,7 +45,7 @@
                             </label>
 
                             <input type="text" name="name" id="name" class="form-control"
-                                value="{{ old('name') }}" placeholder="e.g. Air Max 270" autofocus>
+                                value="{{ old('name', $product->product_name) }}" placeholder="e.g. Air Max 270" autofocus>
                             <x-validation-error name="name" />
 
                             <div class="form-text">
@@ -64,7 +64,8 @@
                                 <option value="" disabled selected>Select a brand</option>
 
                                 @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}" {{ old('brand') == $brand->id ? 'selected' : '' }}>
+                                    <option value="{{ $brand->id }}"
+                                        {{ old('brand', $product->brand_id) == $brand->id ? 'selected' : '' }}>
                                         {{ $brand->brand_name }}
                                     </option>
                                 @endforeach
@@ -84,7 +85,7 @@
                                 <option value="" disabled selected>Select a category</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}"
-                                        {{ old('category') == $category->id ? 'selected' : '' }}>
+                                        {{ old('category', $product->category_id) == $category->id ? 'selected' : '' }}>
                                         {{ $category->category_name }}
                                     </option>
                                 @endforeach
@@ -92,19 +93,6 @@
 
                             <x-validation-error name="category" />
                         </div>
-
-                        <!-- Product Stock -->
-                        <div class="col-md-6">
-                            <label for="stock" class="form-label fw-semibold">
-                                Stock Quantity
-                                <span class="text-danger">*</span>
-                            </label>
-
-                            <input type="number" name="stock" id="stock" class="form-control"
-                                value="{{ old('stock', 0) }}" min="0" placeholder="e.g. 50">
-                            <x-validation-error name="stock" />
-                        </div>
-
                         <!-- Product Price -->
                         <div class="col-md-6">
                             <label for="price" class="form-label fw-semibold">
@@ -115,7 +103,8 @@
                             <div class="input-group">
                                 <span class="input-group-text">$</span>
                                 <input type="number" name="price" id="price" class="form-control"
-                                    value="{{ old('price') }}" min="0" step="0.01" placeholder="0.00">
+                                    value="{{ old('price', $product->product_price) }}" min="0" step="0.01"
+                                    placeholder="0.00">
                             </div>
                             <x-validation-error name="price" />
                         </div>
@@ -129,8 +118,8 @@
                             <div class="input-group">
                                 <span class="input-group-text">$</span>
                                 <input type="number" name="discount" id="discount" class="form-control"
-                                    value="{{ old('discount') }}" min="0" max="100" step="0.01"
-                                    placeholder="0.00">
+                                    value="{{ old('discount', $product->product_discount_price) }}" min="0"
+                                    max="100" step="0.01" placeholder="0.00">
                             </div>
                             <x-validation-error name="discount" />
 
@@ -146,7 +135,7 @@
                             </label>
 
                             <textarea name="description" id="description" class="form-control" rows="4"
-                                placeholder="Write a short description about this product...">{{ old('description') }}</textarea>
+                                placeholder="Write a short description about this product...">{{ old('description', $product->product_description) }}</textarea>
 
                             <x-validation-error name="description" />
                         </div>
@@ -167,26 +156,14 @@
                             </div>
 
                             <!-- Image Preview -->
-                            <div id="imagePreviewWrapper" class="mt-3 d-none">
+                            <div id="imagePreviewWrapper" class="mt-3">
 
                                 <div class="border rounded p-2 bg-light d-inline-block">
-                                    <img id="imagePreview" src="" alt="Product image preview" width="100"
-                                        height="100" class="rounded" style="object-fit: contain;">
+                                    <img id="imagePreview" src="{{ asset('storage/' . $product->image->path) }}"
+                                        alt="Product image preview" width="100" height="100" class="rounded"
+                                        style="object-fit: contain;">
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Is Active -->
-                        <div class="col-md-6 d-flex align-items-end">
-                            <div class="form-check form-switch">
-                                <input type="hidden" name="status" value="0">
-                                <input type="checkbox" name="status" id="status" class="form-check-input"
-                                    value="1" {{ old('status', true) ? 'checked' : '' }}>
-                                <label for="status" class="form-check-label fw-semibold">
-                                    Active
-                                </label>
-                            </div>
-                            <x-validation-error name="status" />
                         </div>
 
                     </div>
@@ -225,9 +202,6 @@
             if (file) {
                 imagePreview.src = URL.createObjectURL(file);
                 imagePreviewWrapper.classList.remove('d-none');
-            } else {
-                imagePreview.src = '';
-                imagePreviewWrapper.classList.add('d-none');
             }
         });
 

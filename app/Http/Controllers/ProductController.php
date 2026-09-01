@@ -7,12 +7,26 @@ use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
 
 // use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     public function __construct(private ProductService $productServices) {}
+
+    public static function middleware(): array
+    {
+        return [
+            'auth',
+            new Middleware('permission:view category', only: ['index']),
+            new Middleware('permission:view detail category', only: ['show']),
+            new Middleware('permission:create category', only: ['create', 'store']),
+            new Middleware('permission:edit category', only: ['edit']),
+            new Middleware('permission:update category', only: ['update']),
+            new Middleware('permission:delete category', only: ['destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */

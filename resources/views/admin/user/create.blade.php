@@ -8,26 +8,27 @@
             <!-- Header -->
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
 
-                <div>
-                    <div class="d-flex align-items-center gap-2 mb-1">
-                        <span class="bg-primary bg-opacity-10 text-primary rounded-3 p-2">
-                            <i class="fa-solid fa-user-plus fa-lg"></i>
-                        </span>
+                <div class="d-flex align-items-center gap-3">
+                    <span
+                        class="bg-primary bg-opacity-10 text-primary rounded-3 p-3 d-inline-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-user-plus fa-xl"></i>
+                    </span>
 
-                        <h1 class="h3 fw-bold mb-0">
+                    <div>
+                        <h1 class="h3 fw-bold mb-1">
                             Add User
                         </h1>
+                        <p class="text-muted mb-0">
+                            Create a new user and assign roles and permissions.
+                        </p>
                     </div>
-
-                    <p class="text-muted mb-0 ms-md-5">
-                        Create a new user and assign roles and permissions.
-                    </p>
                 </div>
 
-                <a href="{{ url()->previous() }}" class="btn btn-dark">
-                    <i class="fa-solid fa-arrow-left me-2"></i>
-                    Back
-                </a>
+                <div>
+                    <a href="{{ url()->previous() }}" class="btn btn-dark px-3">
+                        <i class="fa-solid fa-arrow-left me-2"></i>Back
+                    </a>
+                </div>
 
             </div>
 
@@ -38,16 +39,16 @@
 
             <!-- Validation Errors -->
             @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
 
                     <div class="d-flex gap-3">
 
-                        <i class="fa-solid fa-circle-exclamation fs-5"></i>
+                        <i class="fa-solid fa-circle-exclamation fs-4 mt-1"></i>
 
                         <div>
-                            <strong>Please fix the following errors:</strong>
+                            <strong class="d-block mb-1">Please fix the following errors:</strong>
 
-                            <ul class="mb-0 mt-2">
+                            <ul class="mb-0 ps-3">
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
                                 @endforeach
@@ -56,8 +57,7 @@
 
                     </div>
 
-                    <button type="button" class="btn-close" data-bs-dismiss="alert">
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
                 </div>
             @endif
@@ -81,9 +81,10 @@
 
                             <div class="col-12">
 
-                                <div class="d-flex align-items-center gap-2 border-bottom pb-3">
+                                <div class="d-flex align-items-center gap-3 border-bottom pb-3">
 
-                                    <span class="bg-primary bg-opacity-10 text-primary rounded-3 p-2">
+                                    <span
+                                        class="bg-primary bg-opacity-10 text-primary rounded-3 p-2 d-inline-flex align-items-center justify-content-center">
                                         <i class="fa-solid fa-user"></i>
                                     </span>
 
@@ -106,20 +107,18 @@
                             <div class="col-md-6">
 
                                 <label for="name" class="form-label fw-semibold">
-                                    <i class="fa-solid fa-user text-secondary me-1"></i>
-                                    Name
-                                    <span class="text-danger">*</span>
+                                    Name <span class="text-danger">*</span>
                                 </label>
 
                                 <div class="input-group">
 
-                                    <span class="input-group-text">
+                                    <span class="input-group-text bg-light border-end-0">
                                         <i class="fa-solid fa-user text-secondary"></i>
                                     </span>
 
                                     <input type="text" name="name" id="name"
-                                        class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
-                                        placeholder="Enter full name" autofocus>
+                                        class="form-control border-start-0 @error('name') is-invalid @enderror"
+                                        value="{{ old('name') }}" placeholder="Enter full name" autofocus>
 
                                 </div>
 
@@ -132,19 +131,17 @@
                             <div class="col-md-6">
 
                                 <label for="email" class="form-label fw-semibold">
-                                    <i class="fa-solid fa-envelope text-secondary me-1"></i>
-                                    Email
-                                    <span class="text-danger">*</span>
+                                    Email <span class="text-danger">*</span>
                                 </label>
 
                                 <div class="input-group">
 
-                                    <span class="input-group-text">
+                                    <span class="input-group-text bg-light border-end-0">
                                         <i class="fa-solid fa-envelope text-secondary"></i>
                                     </span>
 
                                     <input type="email" name="email" id="email"
-                                        class="form-control @error('email') is-invalid @enderror"
+                                        class="form-control border-start-0 @error('email') is-invalid @enderror"
                                         value="{{ old('email') }}" placeholder="user@example.com">
 
                                 </div>
@@ -158,22 +155,20 @@
                             <div class="col-md-6">
 
                                 <label for="password" class="form-label fw-semibold">
-                                    <i class="fa-solid fa-lock text-secondary me-1"></i>
-                                    Password
-                                    <span class="text-danger">*</span>
+                                    Password <span class="text-danger">*</span>
                                 </label>
 
                                 <div class="input-group">
 
-                                    <span class="input-group-text">
+                                    <span class="input-group-text bg-light border-end-0">
                                         <i class="fa-solid fa-lock text-secondary"></i>
                                     </span>
 
                                     <input type="password" name="password" id="password"
-                                        class="form-control @error('password') is-invalid @enderror"
+                                        class="form-control border-start-0 border-end-0 @error('password') is-invalid @enderror"
                                         placeholder="Enter password">
 
-                                    <button type="button" class="btn btn-outline-secondary"
+                                    <button type="button" class="btn btn-outline-secondary border-start-0"
                                         onclick="togglePassword('password', this)">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
@@ -189,21 +184,19 @@
                             <div class="col-md-6">
 
                                 <label for="password_confirmation" class="form-label fw-semibold">
-                                    <i class="fa-solid fa-lock text-secondary me-1"></i>
-                                    Confirm Password
-                                    <span class="text-danger">*</span>
+                                    Confirm Password <span class="text-danger">*</span>
                                 </label>
 
                                 <div class="input-group">
 
-                                    <span class="input-group-text">
+                                    <span class="input-group-text bg-light border-end-0">
                                         <i class="fa-solid fa-lock text-secondary"></i>
                                     </span>
 
                                     <input type="password" name="password_confirmation" id="password_confirmation"
-                                        class="form-control" placeholder="Confirm password">
+                                        class="form-control border-start-0 border-end-0" placeholder="Confirm password">
 
-                                    <button type="button" class="btn btn-outline-secondary"
+                                    <button type="button" class="btn btn-outline-secondary border-start-0"
                                         onclick="togglePassword('password_confirmation', this)">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
@@ -221,9 +214,10 @@
 
                             <div class="col-12 mt-4">
 
-                                <div class="d-flex align-items-center gap-2 border-bottom pb-3">
+                                <div class="d-flex align-items-center gap-3 border-bottom pb-3">
 
-                                    <span class="bg-primary bg-opacity-10 text-primary rounded-3 p-2">
+                                    <span
+                                        class="bg-primary bg-opacity-10 text-primary rounded-3 p-2 d-inline-flex align-items-center justify-content-center">
                                         <i class="fa-solid fa-image"></i>
                                     </span>
 
@@ -245,7 +239,6 @@
                             <div class="col-md-6">
 
                                 <label for="image" class="form-label fw-semibold">
-                                    <i class="fa-solid fa-camera text-secondary me-1"></i>
                                     User Image
                                 </label>
 
@@ -255,7 +248,7 @@
 
                                 <x-validation-error name="image" />
 
-                                <div class="form-text">
+                                <div class="form-text mt-2">
                                     <i class="fa-solid fa-circle-info me-1"></i>
                                     PNG, JPG or WEBP. Maximum size: 2MB.
                                 </div>
@@ -264,12 +257,12 @@
                                 <!-- Preview -->
                                 <div id="imagePreviewWrapper" class="mt-3 d-none">
 
-                                    <div class="card border shadow-sm" style="width: 140px;">
+                                    <div class="card border shadow-sm" style="width: 120px;">
 
-                                        <div class="card-body p-2">
+                                        <div class="card-body p-1 text-center">
 
                                             <img id="imagePreview" src="" alt="User image preview"
-                                                class="img-fluid rounded">
+                                                class="img-fluid rounded" style="max-height: 120px; object-fit: cover;">
 
                                         </div>
 
@@ -286,9 +279,10 @@
 
                             <div class="col-12 mt-4">
 
-                                <div class="d-flex align-items-center gap-2 border-bottom pb-3">
+                                <div class="d-flex align-items-center gap-3 border-bottom pb-3">
 
-                                    <span class="bg-primary bg-opacity-10 text-primary rounded-3 p-2">
+                                    <span
+                                        class="bg-primary bg-opacity-10 text-primary rounded-3 p-2 d-inline-flex align-items-center justify-content-center">
                                         <i class="fa-solid fa-shield-halved"></i>
                                     </span>
 
@@ -313,14 +307,14 @@
 
                             <div class="col-lg-6">
 
-                                <div class="card border h-100">
+                                <div class="card border h-100 shadow-sm">
 
                                     <div class="card-header bg-transparent py-3">
 
                                         <div class="d-flex justify-content-between align-items-center">
 
                                             <div>
-                                                <h6 class="fw-bold mb-1">
+                                                <h6 class="fw-bold mb-0">
                                                     <i class="fa-solid fa-user-shield text-primary me-2"></i>
                                                     Roles
                                                 </h6>
@@ -348,14 +342,15 @@
                                             @forelse ($roles as $role)
                                                 <div class="col-sm-6">
 
-                                                    <div class="form-check border rounded p-3">
+                                                    <div
+                                                        class="form-check border rounded p-3 h-100 d-flex align-items-center">
 
-                                                        <input class="form-check-input roles-checkbox" type="checkbox"
-                                                            name="roles[]" value="{{ $role->id }}"
+                                                        <input class="form-check-input roles-checkbox me-2 mt-0"
+                                                            type="checkbox" name="roles[]" value="{{ $role->name }}"
                                                             id="role_{{ $role->id }}"
                                                             {{ in_array($role->id, old('roles', [])) ? 'checked' : '' }}>
 
-                                                        <label class="form-check-label fw-medium"
+                                                        <label class="form-check-label fw-medium w-100 text-truncate"
                                                             for="role_{{ $role->id }}">
                                                             <i class="fa-solid fa-user-tag text-secondary me-1"></i>
                                                             {{ $role->name }}
@@ -394,14 +389,14 @@
 
                             <div class="col-lg-6">
 
-                                <div class="card border h-100">
+                                <div class="card border h-100 shadow-sm">
 
                                     <div class="card-header bg-transparent py-3">
 
                                         <div class="d-flex justify-content-between align-items-center">
 
                                             <div>
-                                                <h6 class="fw-bold mb-1">
+                                                <h6 class="fw-bold mb-0">
                                                     <i class="fa-solid fa-key text-primary me-2"></i>
                                                     Permissions
                                                 </h6>
@@ -429,15 +424,16 @@
                                             @forelse ($permissions as $permission)
                                                 <div class="col-sm-6">
 
-                                                    <div class="form-check border rounded p-3">
+                                                    <div
+                                                        class="form-check border rounded p-3 h-100 d-flex align-items-center">
 
-                                                        <input class="form-check-input permissions-checkbox"
+                                                        <input class="form-check-input permissions-checkbox me-2 mt-0"
                                                             type="checkbox" name="permissions[]"
-                                                            value="{{ $permission->id }}"
+                                                            value="{{ $permission->name }}"
                                                             id="permission_{{ $permission->id }}"
                                                             {{ in_array($permission->id, old('permissions', [])) ? 'checked' : '' }}>
 
-                                                        <label class="form-check-label fw-medium"
+                                                        <label class="form-check-label fw-medium w-100 text-truncate"
                                                             for="permission_{{ $permission->id }}">
                                                             <i class="fa-solid fa-lock-open text-secondary me-1"></i>
                                                             {{ $permission->name }}
@@ -482,20 +478,17 @@
                             <div class="d-flex flex-column flex-sm-row gap-2">
 
                                 <button type="submit" class="btn btn-primary px-4">
-                                    <i class="fa-solid fa-user-plus me-2"></i>
-                                    Save User
+                                    <i class="fa-solid fa-user-plus me-2"></i>Save User
                                 </button>
 
 
                                 <button type="reset" id="resetFormBtn" class="btn btn-outline-danger px-4">
-                                    <i class="fa-solid fa-rotate-left me-2"></i>
-                                    Reset
+                                    <i class="fa-solid fa-rotate-left me-2"></i>Reset
                                 </button>
 
 
                                 <a href="{{ route('user.index') }}" class="btn btn-outline-secondary px-4">
-                                    <i class="fa-solid fa-xmark me-2"></i>
-                                    Cancel
+                                    <i class="fa-solid fa-xmark me-2"></i>Cancel
                                 </a>
 
                             </div>

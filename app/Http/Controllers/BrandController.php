@@ -6,11 +6,24 @@ use App\Http\Requests\Brand\StoreBrandRequest;
 use App\Http\Requests\Brand\UpdateBrandRequest;
 use App\Models\Brand;
 use App\Services\BrandService;
-use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
 
 class BrandController extends Controller
 {
     public function __construct(private BrandService $brandService) {}
+
+    public static function middleware(): array
+    {
+        return [
+            'auth',
+            new Middleware('permission:view brand', only: ['index']),
+            new Middleware('permission:view detail brand', only: ['show']),
+            new Middleware('permission:create brand', only: ['create', 'store']),
+            new Middleware('permission:edit brand', only: ['edit']),
+            new Middleware('permission:update brand', only: ['update']),
+            new Middleware('permission:delete brand', only: ['destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */

@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
+use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    public function __construct(private UserService $userService) {}
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.user.index');
+        $users = $this->userService->getPaginate();
+        $userCount = $users->count();
+        return view('admin.user.index', compact('users', 'userCount'));
     }
 
     /**
@@ -21,17 +28,18 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::orderBy('name')->get();
-        $permissions = Permission::orderBy('name')->get();
+        $roles = $this->userService->getRoles();
+        $permissions = $this->userService->getPermissions();
         return view('admin.user.create', compact('roles', 'permissions'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        $this->userService->createUser($request->validated(), $request->file('image'));
+        return redirect()->back()->with('success', 'User Created Successfully');
     }
 
     /**
@@ -39,7 +47,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        return  view('admin.user.detail');
+        $user = User::findOrFail($id);
+        return  view('admin.user.detail', compact('user'));
     }
 
     /**
@@ -47,15 +56,19 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $roles = $this->userService->getRoles();
+        $permissions = $this->userService->getPermissions();
+        $user = User::findOrFail($id);
+        return view('admin.user.edit', compact('user', 'roles', 'permissions'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, string $id)
     {
-        //
+        $this->userService->updateUser($request->validated(), $id);
+        return redirect()->back()->with('success', 'User Updated Successfully');
     }
 
     /**
@@ -63,6 +76,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->userService->deleteUser($id);
+        return redirect()->back()->with('success', 'User Deleted Successfully');
     }
 }

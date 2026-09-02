@@ -7,11 +7,12 @@ use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
 // use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProductController extends Controller implements HasMiddleware
 {
     public function __construct(private ProductService $productServices) {}
 
@@ -19,12 +20,12 @@ class ProductController extends Controller
     {
         return [
             'auth',
-            new Middleware('permission:view category', only: ['index']),
-            new Middleware('permission:view detail category', only: ['show']),
-            new Middleware('permission:create category', only: ['create', 'store']),
-            new Middleware('permission:edit category', only: ['edit']),
-            new Middleware('permission:update category', only: ['update']),
-            new Middleware('permission:delete category', only: ['destroy']),
+            new Middleware('permission:view product', only: ['index']),
+            new Middleware('permission:view detail product', only: ['show']),
+            new Middleware('permission:create product', only: ['create', 'store']),
+            new Middleware('permission:edit product', only: ['edit']),
+            new Middleware('permission:update product', only: ['update']),
+            new Middleware('permission:delete product', only: ['destroy']),
         ];
     }
     /**

@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 #[Fillable(
     'web_name',
+    'web_description',
     'fb_account',
     'x_account',
     'instagram_account',
+    'whatsapp',
 )]
 class Setting extends Model
 {

@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('web_name');
-            $table->string('fb_account');
-            $table->string('x_account');
-            $table->string('instagram_account');
+            $table->text('web_description');
+            $table->string('fb_account')->nullable();
+            $table->string('x_account')->nullable();
+            $table->string('instagram_account')->nullable();
+            $table->string('whatsapp')->nullable();
             $table->timestamps();
         });
     }

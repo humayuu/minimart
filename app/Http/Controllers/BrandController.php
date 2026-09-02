@@ -6,9 +6,10 @@ use App\Http\Requests\Brand\StoreBrandRequest;
 use App\Http\Requests\Brand\UpdateBrandRequest;
 use App\Models\Brand;
 use App\Services\BrandService;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
-class BrandController extends Controller
+class BrandController extends Controller implements HasMiddleware
 {
     public function __construct(private BrandService $brandService) {}
 

@@ -6,13 +6,26 @@ use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
 use App\Services\UserService;
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class UserController extends Controller
+class UserController extends Controller implements HasMiddleware
 {
     public function __construct(private UserService $userService) {}
+
+
+    public static function middleware(): array
+    {
+        return [
+            'auth',
+            new Middleware('permission:view product', only: ['index']),
+            new Middleware('permission:view detail product', only: ['show']),
+            new Middleware('permission:create product', only: ['create', 'store']),
+            new Middleware('permission:edit product', only: ['edit']),
+            new Middleware('permission:update product', only: ['update']),
+            new Middleware('permission:delete product', only: ['destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */

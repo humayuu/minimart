@@ -77,7 +77,8 @@
 
                 <!-- Orders -->
                 <li class="nav-item mb-1">
-                    <a href="/orders" class="nav-link text-white">
+                    <a href="{{ route('order.index') }}"
+                        class="nav-link {{ request()->routeIs('order.*') ? 'active' : '' }} text-white">
                         <i class="fa-solid fa-cart-shopping me-2"></i>
                         Orders
                     </a>
@@ -94,9 +95,10 @@
 
                 <!-- Settings -->
                 <li class="nav-item mb-1">
-                    <a href="/settings" class="nav-link text-white">
+                    <a href="{{ route('setting.edit', 1) }}"
+                        class="nav-link {{ request()->routeIs('setting.*') ? 'active' : '' }} text-white">
                         <i class="fa-solid fa-gear me-2"></i>
-                        Settings
+                        Update Site Settings
                     </a>
                 </li>
 
@@ -138,10 +140,14 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item" href="/logout">
-                            <i class="fa-solid fa-right-from-bracket me-2"></i>
-                            Logout
-                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button class="dropdown-item">
+                                <i class="fa-solid fa-right-from-bracket me-2"></i>
+                                Logout
+                            </button>
+                        </form>
+
                     </li>
 
                 </ul>

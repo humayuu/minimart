@@ -65,46 +65,59 @@
                 </form>
 
                 {{-- Right nav --}}
-                <ul class="navbar-nav ms-auto align-items-lg-center">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+                    {{-- Account Dropdown --}}
                     <li class="nav-item dropdown">
                         @guest
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-regular fa-user me-1"></i> Account
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="accountDropdown">
                                 <li>
                                     <a class="dropdown-item" href="{{ url('/login') }}">
-                                        <i class="fa-solid fa-right-to-bracket me-2"></i>Login
+                                        <i class="fa-solid fa-right-to-bracket me-2 text-muted"></i>Login
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="{{ url('/signup') }}">
-                                        <i class="fa-solid fa-user-plus me-2"></i>Signup
+                                        <i class="fa-solid fa-user-plus me-2 text-muted"></i>Signup
                                     </a>
                                 </li>
                             </ul>
                         @endguest
 
                         @auth
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-regular fa-user me-1"></i> {{ Auth::user()->name }}
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
+                                @if (Auth::user()->roles !== 'Customer')
+                                    <li>
+                                        <a class="dropdown-item fw-semibold text-primary" href="{{ route('dashboard') }}">
+                                            <i class="fa-solid fa-gauge me-2"></i>Admin Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                @endif
                                 <li>
                                     <a class="dropdown-item" href="{{ route('profile') }}">
-                                        <i class="fa-regular fa-id-badge me-2"></i>Profile
+                                        <i class="fa-regular fa-id-badge me-2 text-muted"></i>Profile
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('change.password') }}">
-                                        <i class="fa-solid fa-key me-2"></i>Change Password
+                                        <i class="fa-solid fa-key me-2 text-muted"></i>Change Password
                                     </a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
-                                    <form method="POST" action="{{ route('logout') }}">
+                                    <form method="POST" action="{{ route('logout') }}" class="m-0">
                                         @csrf
                                         <button type="submit" class="dropdown-item text-danger">
                                             <i class="fa-solid fa-right-from-bracket me-2"></i>Logout
@@ -114,17 +127,22 @@
                             </ul>
                         @endauth
                     </li>
+
+                    {{-- Wishlist --}}
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <i class="fa-regular fa-heart me-1"></i> Wishlist
                         </a>
                     </li>
+
+                    {{-- Cart --}}
                     <li class="nav-item">
-                        <a class="nav-link position-relative" href="#">
+                        <a class="nav-link position-relative pe-3" href="#">
                             <i class="fa-solid fa-cart-shopping me-1"></i> Cart
                             <span
                                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                 3
+                                <span class="visually-hidden">items in cart</span>
                             </span>
                         </a>
                     </li>

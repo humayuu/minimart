@@ -5,7 +5,9 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,5 +45,7 @@ Route::prefix('admin')->group(function () {
         Route::get('product/status/{product}', [ProductController::class, 'productStatus'])->name('product.status');
         Route::resource('product', ProductController::class);
         Route::resource('user', UserController::class);
+        Route::resource('setting', SettingController::class)->only(['edit', 'update']);
+        Route::resource('order', OrderController::class);
     });
 });

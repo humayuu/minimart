@@ -47,7 +47,7 @@
 
                                 <td class="d-flex justify-content-center gap-2">
 
-                                    <a href="#}" class="btn btn-sm btn-primary" title="Detail">
+                                    <a href="#" class="btn btn-sm btn-primary" title="Detail">
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
                                     <button type="button" class="btn btn-sm btn-danger" title="Delete"

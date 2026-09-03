@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,15 +11,24 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class OrderFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::factory(),
+
+            'order_number' => 'ORD-' .
+                now()->format('Ymd') . '-' .
+                fake()->unique()->numberBetween(1000, 9999),
+
+            'status' => fake()->randomElement([
+                'pending',
+                'processing',
+                'shipped',
+                'delivered',
+                'cancelled',
+            ]),
+
+            'total' => fake()->randomFloat(2, 500, 100000),
         ];
     }
 }

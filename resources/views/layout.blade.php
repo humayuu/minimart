@@ -93,7 +93,7 @@
                                 <i class="fa-regular fa-user me-1"></i> {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
-                                @if (Auth::user()->roles !== 'Customer')
+                                @if (auth()->user()->hasRole('Super Admin'))
                                     <li>
                                         <a class="dropdown-item fw-semibold text-primary" href="{{ route('dashboard') }}">
                                             <i class="fa-solid fa-gauge me-2"></i>Admin Dashboard

@@ -18,4 +18,9 @@ class OrderItem extends Model
 {
     /** @use HasFactory<\Database\Factories\OrderItemFactory> */
     use HasFactory;
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

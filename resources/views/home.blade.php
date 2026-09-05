@@ -5,6 +5,7 @@
 
         <div class="container">
             <x-alert-success />
+            <x-alert-error />
 
             {{-- Banner / hero --}}
             <div class="p-5 mb-4 bg-primary bg-gradient text-white rounded-3 text-center">

@@ -2,16 +2,15 @@
 
 @section('main')
     <div class="flex-grow-1 p-4">
-
         <div class="container-fluid">
 
             {{-- Page Header --}}
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
 
                 <div>
-                    <h1 class="h3 fw-bold mb-1">Brand Details</h1>
+                    <h1 class="h3 fw-bold mb-1">Order Details</h1>
                     <p class="text-muted mb-0">
-                        View complete information about this brand.
+                        View complete information about this order.
                     </p>
                 </div>
 
@@ -20,133 +19,234 @@
                         <i class="fa-solid fa-arrow-left me-2"></i>
                         Back
                     </a>
-
-                    <a href="{{ route('brand.edit', $brand->id) }}" class="btn btn-dark">
-                        <i class="fa-solid fa-pen me-2"></i>
-                        Edit Brand
-                    </a>
                 </div>
 
             </div>
 
 
-            {{-- Brand Detail Card --}}
+            {{-- Order Information --}}
+            <div class="card border-0 shadow-sm mb-4">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold mb-4">
+                        Order Information
+                    </h5>
+
+                    <div class="row g-3">
+
+                        {{-- Order ID --}}
+                        <div class="col-md-4">
+                            <div class="bg-light rounded-3 p-3">
+
+                                <small class="text-muted d-block mb-1">
+                                    Order ID
+                                </small>
+
+                                <h6 class="fw-bold mb-0">
+                                    #{{ $order->id }}
+                                </h6>
+
+                            </div>
+                        </div>
+
+
+                        {{-- Order Number --}}
+                        <div class="col-md-4">
+                            <div class="bg-light rounded-3 p-3">
+
+                                <small class="text-muted d-block mb-1">
+                                    Order Number
+                                </small>
+
+                                <h6 class="fw-bold mb-0">
+                                    {{ $order->order_number }}
+                                </h6>
+
+                            </div>
+                        </div>
+
+
+                        {{-- Status --}}
+                        <div class="col-md-4">
+                            <div class="bg-light rounded-3 p-3">
+
+                                <small class="text-muted d-block mb-1">
+                                    Status
+                                </small>
+
+                                <h6 class="fw-bold mb-0">
+                                    {{ ucfirst($order->status) }}
+                                </h6>
+
+                            </div>
+                        </div>
+
+
+                        {{-- User ID --}}
+                        <div class="col-md-4">
+                            <div class="bg-light rounded-3 p-3">
+
+                                <small class="text-muted d-block mb-1">
+                                    Customer ID
+                                </small>
+
+                                <h6 class="fw-bold mb-0">
+                                    #{{ $order->user_id }}
+                                </h6>
+
+                            </div>
+                        </div>
+
+
+                        {{-- Total --}}
+                        <div class="col-md-4">
+                            <div class="bg-light rounded-3 p-3">
+
+                                <small class="text-muted d-block mb-1">
+                                    Order Total
+                                </small>
+
+                                <h6 class="fw-bold mb-0">
+                                    {{ number_format($order->total, 2) }}
+                                </h6>
+
+                            </div>
+                        </div>
+
+
+                        {{-- Created At --}}
+                        <div class="col-md-4">
+                            <div class="bg-light rounded-3 p-3">
+
+                                <small class="text-muted d-block mb-1">
+                                    Created At
+                                </small>
+
+                                <h6 class="fw-bold mb-0">
+                                    {{ $order->created_at->format('d M Y, h:i A') }}
+                                </h6>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {{-- Order Items --}}
             <div class="card border-0 shadow-sm">
 
                 <div class="card-body p-4">
 
-                    <div class="row g-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
 
-                        {{-- Brand Logo --}}
-                        <div class="col-md-4">
+                        <div>
+                            <h5 class="fw-bold mb-1">
+                                Order Items
+                            </h5>
 
-                            <div class="border rounded-3 p-4 text-center h-100">
-
-                                <div class="mb-3">
-                                    @if ($brand->image->path)
-                                        <img src="{{ asset('storage/' . $brand->image->path) }}"
-                                            alt="{{ $brand->brand_name }}" class="img-fluid rounded"
-                                            style="max-height: 180px; max-width: 100%; object-fit: contain;">
-                                    @else
-                                        <div class="d-flex align-items-center justify-content-center bg-light rounded"
-                                            style="height: 180px;">
-                                            <i class="fa-solid fa-image fa-4x text-muted"></i>
-                                        </div>
-                                    @endif
-                                </div>
-
-                                <h5 class="fw-bold mb-1">
-                                    {{ $brand->brand_name }}
-                                </h5>
-
-                                <span class="badge bg-light text-dark border">
-                                    Brand
-                                </span>
-
-                            </div>
-
+                            <p class="text-muted mb-0">
+                                Products included in this order.
+                            </p>
                         </div>
 
+                        <span class="badge bg-dark">
+                            {{ $order->orderItems->count() }} Items
+                        </span>
 
-                        {{-- Brand Information --}}
-                        <div class="col-md-8">
-
-                            <div class="row g-3">
-
-                                {{-- Brand Name --}}
-                                <div class="col-md-6">
-                                    <div class="bg-light rounded-3 p-3">
-                                        <small class="text-muted d-block mb-1">
-                                            Brand Name
-                                        </small>
-
-                                        <h6 class="fw-bold mb-0">
-                                            {{ $brand->brand_name }}
-                                        </h6>
-                                    </div>
-                                </div>
+                    </div>
 
 
-                                {{-- Slug --}}
-                                <div class="col-md-6">
-                                    <div class="bg-light rounded-3 p-3">
-                                        <small class="text-muted d-block mb-1">
-                                            Brand Slug
-                                        </small>
+                    {{-- Items Table --}}
+                    <div class="table-responsive">
 
-                                        <h6 class="fw-bold mb-0 text-break">
-                                            {{ $brand->brand_slug }}
-                                        </h6>
-                                    </div>
-                                </div>
+                        <table class="table table-hover align-middle mb-0">
 
+                            <thead class="table-light">
 
-                                {{-- Product Count --}}
-                                <div class="col-md-6">
-                                    <div class="bg-light rounded-3 p-3">
-                                        <small class="text-muted d-block mb-1">
-                                            Products
-                                        </small>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Product</th>
+                                    <th>Product ID</th>
+                                    <th>Unit Price</th>
+                                    <th>Quantity</th>
+                                    <th>Line Total</th>
+                                </tr>
 
-                                        <h6 class="fw-bold mb-0">
-                                            {{ $brand->product->count() }}
-                                        </h6>
-                                    </div>
-                                </div>
+                            </thead>
 
 
-                                {{-- Created At --}}
-                                <div class="col-md-6">
-                                    <div class="bg-light rounded-3 p-3">
-                                        <small class="text-muted d-block mb-1">
-                                            Created At
-                                        </small>
+                            <tbody>
 
-                                        <h6 class="fw-bold mb-0">
-                                            {{ $brand->created_at->format('d M Y') }}
-                                        </h6>
-                                    </div>
-                                </div>
+                                @forelse ($order->orderItems as $item)
+                                    <tr>
+
+                                        <td>
+                                            {{ $loop->iteration }}
+                                        </td>
+
+                                        <td>
+                                            <span class="fw-semibold">
+                                                {{ $item->product_name }}
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            #{{ $item->product_id }}
+                                        </td>
+
+                                        <td>
+                                            {{ number_format($item->unit_price, 2) }}
+                                        </td>
+
+                                        <td>
+                                            <span class="badge bg-light text-dark border">
+                                                {{ $item->quantity }}
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <span class="fw-bold">
+                                                {{ number_format($item->line_total, 2) }}
+                                            </span>
+                                        </td>
+
+                                    </tr>
+
+                                @empty
+
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted py-4">
+                                            No items found for this order.
+                                        </td>
+                                    </tr>
+                                @endforelse
+
+                            </tbody>
 
 
-                                {{-- Description --}}
-                                <div class="col-12">
-                                    <div class="bg-light rounded-3 p-3">
+                            {{-- Total --}}
+                            <tfoot>
 
-                                        <small class="text-muted d-block mb-2">
-                                            Description
-                                        </small>
+                                <tr>
 
-                                        <p class="mb-0 text-muted">
-                                            {{ $brand->brand_description ?: 'No description available.' }}
-                                        </p>
+                                    <td colspan="5" class="text-end fw-bold">
+                                        Order Total:
+                                    </td>
 
-                                    </div>
-                                </div>
+                                    <td class="fw-bold">
+                                        {{ number_format($order->total, 2) }}
+                                    </td>
 
-                            </div>
+                                </tr>
 
-                        </div>
+                            </tfoot>
+
+                        </table>
 
                     </div>
 
